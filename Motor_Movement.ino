@@ -1,6 +1,6 @@
 #include <Servo.h>
 Servo myservo; 
-String inByte;
+String command;
 int pos;
 
 void setup() {
@@ -11,12 +11,11 @@ void setup() {
 
 void loop()
 {    
-  if(Serial.available())  // if data available in serial port
+  if(Serial.available())
     { 
-    inByte = Serial.readStringUntil('\n'); // read data until newline
-    pos = inByte.toInt();   // change datatype from string to integer        
-    myservo.write(pos);     // move servo
-    Serial.print("Servo in position: ");  
-    Serial.println(inByte);
+    command = Serial.readStringUntil('\n');
+    pos = command.toInt();
+    myservo.write(pos);
+    Serial.println(command);
     }
 }
